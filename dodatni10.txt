@@ -1,0 +1,48 @@
+// Dodatni 10
+int SamoProsti()
+
+    brojevi.txt
+
+fread(void* ptr, size_t vel, size_t broj, FILE* dat)
+
+    – pokazivaè na blok memorije koji se zapisuje u datoteku;
+    – velièina jednog elementa u bajtima (sizeof);
+    – broj elemenata;
+    – pokazivaè na datoteku.
+
+
+    FILE* dat = fopen("binarna.dat", "rb");
+    char ime[100];
+    int ucitano = fread(ime, 1, 99, dat);
+    ime[ucitano] = '\0';
+    fclose(dat);
+
+
+
+    int ucitaj(struct Osoba* imenik) {
+        FILE* dat = fopen("baza.dat", "rb");
+        if (dat == NULL) {
+            printf("Greska pri otvaranju datoteke.\n");
+            return 0;
+        }
+        int ucitano = fread(imenik, sizeof(Osoba),
+                KAPACITET, // broj elemenata koji se cita
+                dat);
+        fclose(dat);
+        return ucitano;
+    }
+
+void zapisi(struct Osoba* imenik, int broj_osoba) {
+    FILE* dat = fopen("baza.dat", "wb");
+    if (dat == NULL) {
+        printf("Greska pri otvaranju datoteke.\n");
+        exit(1);
+    }
+    int zapisano = fwrite(imenik, sizeof(Osoba),
+            broj_osoba, dat);
+    if (ferror(dat)) {
+        printf("Greska prilikom pisanja datoteke.\n");
+        printf("Zapisano je samo %d osoba\n", zapisano);
+    }
+    fclose(dat);
+}

@@ -1,0 +1,21 @@
+Zadatak 1
+char *PosljednjaRijec (char *s)
+{
+    char *p = s;
+    int raz = 1;
+    while(*s!='\0')
+    {
+        if (!isalpha(*s))
+            raz=1;
+        else if (raz==1)
+        {
+            raz=0;
+            p = s;
+        }
+        s++;
+    }
+    return p;
+}
+
+
+
